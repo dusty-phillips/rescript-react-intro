@@ -4,15 +4,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App.bs';
+import {make as App} from './App.bs';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+const root = document.getElementById('reactroot')
+
+if (root !== undefined) {
+  ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <App />
   </React.StrictMode>,
-  document.getElementById('root')
-);
+  root
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
