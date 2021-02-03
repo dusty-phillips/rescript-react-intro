@@ -21,5 +21,9 @@ let make = () => {
   | _ => "Home"
   }
 
-  <div> {React.string(selected)} </div>
+  <div style={ReactDOM.Style.make(~display="flex", ~justifyContent="center", ())}>
+    <NavButton name="Home" selected={selected} linkTo="/" />
+    <NavButton name="Tags" selected={selected} linkTo="/tags" />
+    <NavButton name="Recipes" selected={selected} linkTo="/recipes/add" />
+  </div>
 }

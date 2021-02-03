@@ -44,7 +44,24 @@ function NavBar(Props) {
   } else {
     selected = "Home";
   }
-  return React.createElement("div", undefined, selected);
+  return React.createElement("div", {
+              style: {
+                display: "flex",
+                justifyContent: "center"
+              }
+            }, React.createElement(NavBar$NavButton, {
+                  name: "Home",
+                  selected: selected,
+                  linkTo: "/"
+                }), React.createElement(NavBar$NavButton, {
+                  name: "Tags",
+                  selected: selected,
+                  linkTo: "/tags"
+                }), React.createElement(NavBar$NavButton, {
+                  name: "Recipes",
+                  selected: selected,
+                  linkTo: "/recipes/add"
+                }));
 }
 
 var make = NavBar;
