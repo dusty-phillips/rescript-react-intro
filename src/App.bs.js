@@ -2,38 +2,51 @@
 
 import * as React from "react";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs.js";
+import * as NavBar$RescriptReactIntro from "./NavBar.bs.js";
 
 function App(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
   var match = url.path;
-  if (!match) {
-    return React.createElement("div", undefined, "Home page");
-  }
-  switch (match.hd) {
-    case "recipes" :
-        var match$1 = match.tl;
-        if (match$1) {
-          var title = match$1.hd;
-          if (title === "add") {
-            if (!match$1.tl) {
-              return React.createElement("div", undefined, "Add Recipe");
+  var component;
+  var exit = 0;
+  if (match) {
+    switch (match.hd) {
+      case "recipes" :
+          var match$1 = match.tl;
+          if (match$1) {
+            var title = match$1.hd;
+            if (title === "add") {
+              if (match$1.tl) {
+                exit = 1;
+              } else {
+                component = React.createElement("div", undefined, "Add Recipe");
+              }
+            } else if (match$1.tl) {
+              exit = 1;
+            } else {
+              component = React.createElement("div", undefined, "View Recipe " + title);
             }
-            
-          } else if (!match$1.tl) {
-            return React.createElement("div", undefined, "View Recipe " + title);
+          } else {
+            exit = 1;
           }
-          
-        }
-        break;
-    case "tags" :
-        if (!match.tl) {
-          return React.createElement("div", undefined, "All tags");
-        }
-        break;
-    default:
-      
+          break;
+      case "tags" :
+          if (match.tl) {
+            exit = 1;
+          } else {
+            component = React.createElement("div", undefined, "All tags");
+          }
+          break;
+      default:
+        exit = 1;
+    }
+  } else {
+    component = React.createElement("div", undefined, "Home page");
   }
-  return React.createElement("div", undefined, "Route not found");
+  if (exit === 1) {
+    component = React.createElement("div", undefined, "Route not found");
+  }
+  return React.createElement("div", undefined, React.createElement(NavBar$RescriptReactIntro.make, {}), component);
 }
 
 var make = App;
