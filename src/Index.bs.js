@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as ReactDom from "react-dom";
-import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
+import * as Caml_option from "bs-platform/lib/es6/caml_option.mjs";
 import ReportWebVitals from "./reportWebVitals";
 import * as App$RescriptReactIntro from "./App.bs.js";
 
