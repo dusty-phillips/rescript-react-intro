@@ -3,6 +3,29 @@
 import * as React from "react";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs.js";
 
+function NavBar$NavButton(Props) {
+  var name = Props.name;
+  var selected = Props.selected;
+  var linkTo = Props.linkTo;
+  var style = selected === name ? ({
+        backgroundColor: "#656565",
+        padding: "1ex"
+      }) : ({
+        backgroundColor: "#efefef",
+        padding: "1ex"
+      });
+  return React.createElement("div", {
+              style: style,
+              onClick: (function (param) {
+                  return RescriptReactRouter.push(linkTo);
+                })
+            }, name);
+}
+
+var NavButton = {
+  make: NavBar$NavButton
+};
+
 function NavBar(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
   var match = url.path;
@@ -27,6 +50,7 @@ function NavBar(Props) {
 var make = NavBar;
 
 export {
+  NavButton ,
   make ,
   
 }
