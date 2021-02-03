@@ -33,15 +33,7 @@ function App(Props) {
     default:
       
   }
-  throw {
-        RE_EXN_ID: "Match_failure",
-        _1: [
-          "App.res",
-          5,
-          2
-        ],
-        Error: new Error()
-      };
+  return React.createElement("div", undefined, "Route not found");
 }
 
 var make = App;
