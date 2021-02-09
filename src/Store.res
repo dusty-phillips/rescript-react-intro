@@ -30,6 +30,28 @@ let reducer = (state: state, action: action) => {
       ),
       tags: state.tags,
     }
-  | _ => initialState
+  | AddTag({recipeTitle, tag}) => {
+      let recipeOption = state.recipes->Map.String.get(recipeTitle)
+
+      switch recipeOption {
+      | Some(recipe) => {
+          let recipeTags = recipe.tags->Array.concat([tag])
+          let recipes = state.recipes->Map.String.set(recipe.title, {...recipe, tags: recipeTags})
+
+          let tags = state.tags->Map.String.update(tag, taggedRecipesOption =>
+            switch taggedRecipesOption {
+            | None => Some([recipe.title])
+            | Some(taggedRecipes) => Some(taggedRecipes->Array.concat([recipe.title]))
+            }
+          )
+
+          {
+            recipes: recipes,
+            tags: tags,
+          }
+        }
+      | None => state
+      }
+    }
   }
 }
