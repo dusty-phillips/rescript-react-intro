@@ -8,21 +8,28 @@ var initialState = {
   tags: undefined
 };
 
-function reducer(state, action) {
-  if (action.TAG === /* AddRecipe */0) {
-    var title = action.title;
-    return {
-            recipes: Belt_MapString.set(state.recipes, title, {
-                  title: title,
-                  ingredients: action.ingredients,
-                  instructions: action.instructions,
-                  tags: []
-                }),
-            tags: state.tags
-          };
+function addRecipe(state, title, ingredients, instructions) {
+  return {
+          recipes: Belt_MapString.set(state.recipes, title, {
+                title: title,
+                ingredients: ingredients,
+                instructions: instructions,
+                tags: []
+              }),
+          tags: state.tags
+        };
+}
+
+function updateTagsArray(taggedRecipesOption, recipeTitle) {
+  if (taggedRecipesOption !== undefined) {
+    return Belt_Array.concat(taggedRecipesOption, [recipeTitle]);
+  } else {
+    return [recipeTitle];
   }
-  var tag = action.tag;
-  var recipeOption = Belt_MapString.get(state.recipes, action.recipeTitle);
+}
+
+function addTag(state, recipeTitle, tag) {
+  var recipeOption = Belt_MapString.get(state.recipes, recipeTitle);
   if (recipeOption === undefined) {
     return state;
   }
@@ -34,11 +41,7 @@ function reducer(state, action) {
         tags: recipeTags
       });
   var tags = Belt_MapString.update(state.tags, tag, (function (taggedRecipesOption) {
-          if (taggedRecipesOption !== undefined) {
-            return Belt_Array.concat(taggedRecipesOption, [recipeOption.title]);
-          } else {
-            return [recipeOption.title];
-          }
+          return updateTagsArray(taggedRecipesOption, recipeOption.title);
         }));
   return {
           recipes: recipes,
@@ -46,8 +49,19 @@ function reducer(state, action) {
         };
 }
 
+function reducer(state, action) {
+  if (action.TAG === /* AddRecipe */0) {
+    return addRecipe(state, action.title, action.ingredients, action.instructions);
+  } else {
+    return addTag(state, action.recipeTitle, action.tag);
+  }
+}
+
 export {
   initialState ,
+  addRecipe ,
+  updateTagsArray ,
+  addTag ,
   reducer ,
   
 }

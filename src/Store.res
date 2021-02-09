@@ -21,37 +21,49 @@ type action =
   | AddRecipe({title: string, ingredients: string, instructions: string})
   | AddTag({recipeTitle: string, tag: string})
 
-let reducer = (state: state, action: action) => {
-  switch action {
-  | AddRecipe({title, ingredients, instructions}) => {
-      recipes: state.recipes->Map.String.set(
-        title,
-        {title: title, ingredients: ingredients, instructions: instructions, tags: []},
-      ),
-      tags: state.tags,
-    }
-  | AddTag({recipeTitle, tag}) => {
-      let recipeOption = state.recipes->Map.String.get(recipeTitle)
+let addRecipe = (state: state, title: string, ingredients: string, instructions: string) => {
+  {
+    recipes: state.recipes->Map.String.set(
+      title,
+      {title: title, ingredients: ingredients, instructions: instructions, tags: []},
+    ),
+    tags: state.tags,
+  }
+}
 
-      switch recipeOption {
-      | Some(recipe) => {
-          let recipeTags = recipe.tags->Array.concat([tag])
-          let recipes = state.recipes->Map.String.set(recipe.title, {...recipe, tags: recipeTags})
+let updateTagsArray = (taggedRecipesOption: option<array<string>>, recipeTitle: string) => {
+  switch taggedRecipesOption {
+  | None => Some([recipeTitle])
+  | Some(taggedRecipes) => Some(taggedRecipes->Array.concat([recipeTitle]))
+  }
+}
 
-          let tags = state.tags->Map.String.update(tag, taggedRecipesOption =>
-            switch taggedRecipesOption {
-            | None => Some([recipe.title])
-            | Some(taggedRecipes) => Some(taggedRecipes->Array.concat([recipe.title]))
-            }
-          )
+let addTag = (state: state, recipeTitle: string, tag: string) => {
+  let recipeOption = state.recipes->Map.String.get(recipeTitle)
 
-          {
-            recipes: recipes,
-            tags: tags,
-          }
-        }
-      | None => state
+  switch recipeOption {
+  | None => state
+  | Some(recipe) => {
+      let recipeTags = recipe.tags->Array.concat([tag])
+      let recipes = state.recipes->Map.String.set(recipe.title, {...recipe, tags: recipeTags})
+
+      let tags =
+        state.tags->Map.String.update(tag, taggedRecipesOption =>
+          updateTagsArray(taggedRecipesOption, recipe.title)
+        )
+
+      {
+        recipes: recipes,
+        tags: tags,
       }
     }
+  }
+}
+
+let reducer = (state: state, action: action) => {
+  switch action {
+  | AddRecipe({title, ingredients, instructions}) =>
+    addRecipe(state, title, ingredients, instructions)
+  | AddTag({recipeTitle, tag}) => addTag(state, recipeTitle, tag)
   }
 }
