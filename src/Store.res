@@ -16,3 +16,7 @@ let initialState: state = {
   recipes: Map.String.empty,
   tags: Map.String.empty,
 }
+
+type action =
+  | AddRecipe({title: string, ingredients: string, instructions: string})
+  | AddTag({recipeTitle: string, tag: string})
