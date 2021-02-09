@@ -6,3 +6,13 @@ type recipe = {
   instructions: string,
   tags: array<string>,
 }
+
+type state = {
+  recipes: Map.String.t<recipe>,
+  tags: Map.String.t<array<string>>,
+}
+
+let initialState: state = {
+  recipes: Map.String.empty,
+  tags: Map.String.empty,
+}
