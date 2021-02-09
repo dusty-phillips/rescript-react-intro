@@ -24,8 +24,7 @@ type action =
 let reducer = (state: state, action: action) => {
   switch action {
   | AddRecipe({title, ingredients, instructions}) => {
-      recipes: Map.String.set(
-        state.recipes,
+      recipes: state.recipes->Map.String.set(
         title,
         {title: title, ingredients: ingredients, instructions: instructions, tags: []},
       ),
