@@ -6,11 +6,13 @@ import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs
 import * as Store$RescriptReactIntro from "./Store.bs.js";
 import * as NavBar$RescriptReactIntro from "./NavBar.bs.js";
 import * as AllTags$RescriptReactIntro from "./AllTags.bs.js";
+import * as ViewRecipe$RescriptReactIntro from "./ViewRecipe.bs.js";
 
 function App(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
   var match = React.useReducer(Store$RescriptReactIntro.reducer, Store$RescriptReactIntro.initialState);
   var dispatch = match[1];
+  var state = match[0];
   React.useEffect((function () {
           Curry._1(dispatch, {
                 TAG: /* AddRecipe */0,
@@ -43,7 +45,10 @@ function App(Props) {
             } else if (match$2.tl) {
               exit = 1;
             } else {
-              component = React.createElement("div", undefined, "View Recipe " + title);
+              component = React.createElement("div", undefined, React.createElement(ViewRecipe$RescriptReactIntro.make, {
+                        state: state,
+                        title: title
+                      }));
             }
           } else {
             exit = 1;
@@ -54,7 +59,7 @@ function App(Props) {
             exit = 1;
           } else {
             component = React.createElement(AllTags$RescriptReactIntro.make, {
-                  tags: match[0].tags
+                  tags: state.tags
                 });
           }
           break;
