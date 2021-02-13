@@ -4,6 +4,7 @@ import * as React from "react";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs.js";
 import * as Store$RescriptReactIntro from "./Store.bs.js";
 import * as NavBar$RescriptReactIntro from "./NavBar.bs.js";
+import * as AllTags$RescriptReactIntro from "./AllTags.bs.js";
 
 function App(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
@@ -36,7 +37,7 @@ function App(Props) {
           if (match.tl) {
             exit = 1;
           } else {
-            component = React.createElement("div", undefined, "All tags");
+            component = React.createElement(AllTags$RescriptReactIntro.make, {});
           }
           break;
       default:
