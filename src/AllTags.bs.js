@@ -3,6 +3,8 @@
 import * as React from "react";
 
 function AllTags(Props) {
+  var tags = Props.tags;
+  console.log(tags);
   return React.createElement("div", undefined, "All tags");
 }
 

@@ -8,23 +8,23 @@ import * as AllTags$RescriptReactIntro from "./AllTags.bs.js";
 
 function App(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
-  React.useReducer(Store$RescriptReactIntro.reducer, Store$RescriptReactIntro.initialState);
-  var match = url.path;
+  var match = React.useReducer(Store$RescriptReactIntro.reducer, Store$RescriptReactIntro.initialState);
+  var match$1 = url.path;
   var component;
   var exit = 0;
-  if (match) {
-    switch (match.hd) {
+  if (match$1) {
+    switch (match$1.hd) {
       case "recipes" :
-          var match$1 = match.tl;
-          if (match$1) {
-            var title = match$1.hd;
+          var match$2 = match$1.tl;
+          if (match$2) {
+            var title = match$2.hd;
             if (title === "add") {
-              if (match$1.tl) {
+              if (match$2.tl) {
                 exit = 1;
               } else {
                 component = React.createElement("div", undefined, "Add Recipe");
               }
-            } else if (match$1.tl) {
+            } else if (match$2.tl) {
               exit = 1;
             } else {
               component = React.createElement("div", undefined, "View Recipe " + title);
@@ -34,10 +34,12 @@ function App(Props) {
           }
           break;
       case "tags" :
-          if (match.tl) {
+          if (match$1.tl) {
             exit = 1;
           } else {
-            component = React.createElement(AllTags$RescriptReactIntro.make, {});
+            component = React.createElement(AllTags$RescriptReactIntro.make, {
+                  tags: match[0].tags
+                });
           }
           break;
       default:
