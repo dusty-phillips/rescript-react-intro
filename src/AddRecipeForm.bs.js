@@ -2,23 +2,28 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.mjs";
 import * as React from "react";
+import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs.js";
 
 function AddRecipeForm(Props) {
+  var dispatch = Props.dispatch;
   var match = React.useState(function () {
         return "";
       });
   var setTitle = match[1];
+  var title = match[0];
   var match$1 = React.useState(function () {
         return "";
       });
   var setIngredients = match$1[1];
+  var ingredients = match$1[0];
   var match$2 = React.useState(function () {
         return "";
       });
   var setInstructions = match$2[1];
+  var instructions = match$2[0];
   return React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("input", {
                       placeholder: "Title",
-                      value: match[0],
+                      value: title,
                       onChange: (function ($$event) {
                           var title = $$event.target.value;
                           return Curry._1(setTitle, (function (param) {
@@ -26,7 +31,7 @@ function AddRecipeForm(Props) {
                                       }));
                         })
                     })), React.createElement("div", undefined, React.createElement("label", undefined, React.createElement("h3", undefined, "Ingredients"), React.createElement("textarea", {
-                          value: match$1[0],
+                          value: ingredients,
                           onChange: (function ($$event) {
                               var ingredients = $$event.target.value;
                               return Curry._1(setIngredients, (function (param) {
@@ -34,14 +39,24 @@ function AddRecipeForm(Props) {
                                           }));
                             })
                         }))), React.createElement("div", undefined, React.createElement("label", undefined, React.createElement("h3", undefined, "Instructions"), React.createElement("textarea", {
-                          value: match$2[0],
+                          value: instructions,
                           onChange: (function ($$event) {
                               var instructions = $$event.target.value;
                               return Curry._1(setInstructions, (function (param) {
                                             return instructions;
                                           }));
                             })
-                        }))), React.createElement("button", undefined, "Add!"));
+                        }))), React.createElement("button", {
+                  onClick: (function (param) {
+                      Curry._1(dispatch, {
+                            TAG: /* AddRecipe */0,
+                            title: title,
+                            ingredients: ingredients,
+                            instructions: instructions
+                          });
+                      return RescriptReactRouter.push("/recipes/" + title);
+                    })
+                }, "Add!"));
 }
 
 var make = AddRecipeForm;

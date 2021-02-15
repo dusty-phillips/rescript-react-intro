@@ -38,6 +38,14 @@ let make = (~dispatch: Store.action => unit) => {
         />
       </label>
     </div>
-    <button> {React.string("Add!")} </button>
+    <button
+      onClick={_ => {
+        dispatch(
+          Store.AddRecipe({title: title, ingredients: ingredients, instructions: instructions}),
+        )
+        RescriptReactRouter.push(`/recipes/${title}`)
+      }}>
+      {React.string("Add!")}
+    </button>
   </div>
 }
