@@ -7,6 +7,7 @@ import * as Store$RescriptReactIntro from "./Store.bs.js";
 import * as NavBar$RescriptReactIntro from "./NavBar.bs.js";
 import * as AllTags$RescriptReactIntro from "./AllTags.bs.js";
 import * as ViewRecipe$RescriptReactIntro from "./ViewRecipe.bs.js";
+import * as AddRecipeForm$RescriptReactIntro from "./AddRecipeForm.bs.js";
 
 function App(Props) {
   var url = RescriptReactRouter.useUrl(undefined, undefined);
@@ -40,7 +41,9 @@ function App(Props) {
               if (match$2.tl) {
                 exit = 1;
               } else {
-                component = React.createElement("div", undefined, "Add Recipe");
+                component = React.createElement(AddRecipeForm$RescriptReactIntro.make, {
+                      dispatch: dispatch
+                    });
               }
             } else if (match$2.tl) {
               exit = 1;
