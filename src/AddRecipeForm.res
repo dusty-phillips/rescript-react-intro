@@ -1,9 +1,43 @@
 @react.component
 let make = (~dispatch: Store.action => unit) => {
+  let (title, setTitle) = React.useState(() => "")
+  let (ingredients, setIngredients) = React.useState(() => "")
+  let (instructions, setInstructions) = React.useState(() => "")
   <div>
-    <div> <input placeholder="Title" /> </div>
-    <div> <label> <h3> {React.string("Ingredients")} </h3> <textarea /> </label> </div>
-    <div> <label> <h3> {React.string("Instructions")} </h3> <textarea /> </label> </div>
+    <div>
+      <input
+        placeholder="Title"
+        value={title}
+        onChange={event => {
+          let title = ReactEvent.Form.target(event)["value"]
+          setTitle(_ => title)
+        }}
+      />
+    </div>
+    <div>
+      <label>
+        <h3> {React.string("Ingredients")} </h3>
+        <textarea
+          onChange={event => {
+            let ingredients = ReactEvent.Form.target(event)["value"]
+            setIngredients(_ => ingredients)
+          }}
+          value={ingredients}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        <h3> {React.string("Instructions")} </h3>
+        <textarea
+          onChange={event => {
+            let instructions = ReactEvent.Form.target(event)["value"]
+            setInstructions(_ => instructions)
+          }}
+          value={instructions}
+        />
+      </label>
+    </div>
     <button> {React.string("Add!")} </button>
   </div>
 }
