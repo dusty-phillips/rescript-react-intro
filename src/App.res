@@ -18,7 +18,7 @@ let make = () => {
 
   let component = switch url.path {
   | list{"recipes", "add"} => <AddRecipeForm dispatch />
-  | list{"recipes", title} => <div> {<ViewRecipe state title />} </div>
+  | list{"recipes", title} => <div> {<ViewRecipe state title dispatch />} </div>
   | list{"tags"} => <AllTags tags={state.tags} />
   | list{} => <div> {React.string("Home page")} </div>
   | _ => <div> {React.string("Route not found")} </div>

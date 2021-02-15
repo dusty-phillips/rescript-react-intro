@@ -50,7 +50,8 @@ function App(Props) {
             } else {
               component = React.createElement("div", undefined, React.createElement(ViewRecipe$RescriptReactIntro.make, {
                         state: state,
-                        title: title
+                        title: title,
+                        dispatch: dispatch
                       }));
             }
           } else {
