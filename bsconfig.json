@@ -23,5 +23,5 @@
     "language": "typescript"
   },
 
-  "bs-dependencies": ["@rescript/react"]
+  "bs-dependencies": ["@rescript/react", "bs-css", "bs-css-emotion"]
 }
