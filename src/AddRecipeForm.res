@@ -1,3 +1,13 @@
+module Styles = {
+  open CssJs
+  let longEntry = style(. [
+    width(100.0->#percent),
+    maxWidth(20.0->#rem),
+    borderRadius(0.5->#rem),
+    padding(0.5->#rem),
+  ])
+}
+
 @react.component
 let make = (~dispatch: Store.action => unit) => {
   let (title, setTitle) = React.useState(() => "")
@@ -6,6 +16,7 @@ let make = (~dispatch: Store.action => unit) => {
   <div className=CardStyles.formCard>
     <div>
       <input
+        className=Styles.longEntry
         placeholder="Title"
         value={title}
         onChange={event => {
@@ -18,6 +29,7 @@ let make = (~dispatch: Store.action => unit) => {
       <label>
         <h3> {React.string("Ingredients")} </h3>
         <textarea
+          className=Styles.longEntry
           onChange={event => {
             let ingredients = ReactEvent.Form.target(event)["value"]
             setIngredients(_ => ingredients)
@@ -30,6 +42,7 @@ let make = (~dispatch: Store.action => unit) => {
       <label>
         <h3> {React.string("Instructions")} </h3>
         <textarea
+          className=Styles.longEntry
           onChange={event => {
             let instructions = ReactEvent.Form.target(event)["value"]
             setInstructions(_ => instructions)
