@@ -12,8 +12,15 @@ function navButton(selected) {
             ]);
 }
 
+var navBar = CssJs.style([
+      CssJs.display("flex"),
+      CssJs.justifyContent("center"),
+      CssJs.borderBottom(CssJs.px(1), "solid", CssJs.hex("656565"))
+    ]);
+
 var Styles = {
-  navButton: navButton
+  navButton: navButton,
+  navBar: navBar
 };
 
 function NavBar$NavButton(Props) {
@@ -51,10 +58,7 @@ function NavBar(Props) {
     selected = "Home";
   }
   return React.createElement("div", {
-              style: {
-                display: "flex",
-                justifyContent: "center"
-              }
+              className: navBar
             }, React.createElement(NavBar$NavButton, {
                   name: "Home",
                   selected: selected,
@@ -78,4 +82,4 @@ export {
   make ,
   
 }
-/* CssJs Not a pure module */
+/* navBar Not a pure module */
