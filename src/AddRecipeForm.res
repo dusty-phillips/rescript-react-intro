@@ -3,7 +3,7 @@ let make = (~dispatch: Store.action => unit) => {
   let (title, setTitle) = React.useState(() => "")
   let (ingredients, setIngredients) = React.useState(() => "")
   let (instructions, setInstructions) = React.useState(() => "")
-  <div>
+  <div className=CardStyles.formCard>
     <div>
       <input
         placeholder="Title"

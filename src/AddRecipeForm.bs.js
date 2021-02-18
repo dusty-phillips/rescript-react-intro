@@ -3,6 +3,7 @@
 import * as Curry from "bs-platform/lib/es6/curry.mjs";
 import * as React from "react";
 import * as RescriptReactRouter from "@rescript/react/src/RescriptReactRouter.bs.js";
+import * as CardStyles$RescriptReactIntro from "./CardStyles.bs.js";
 
 function AddRecipeForm(Props) {
   var dispatch = Props.dispatch;
@@ -21,7 +22,9 @@ function AddRecipeForm(Props) {
       });
   var setInstructions = match$2[1];
   var instructions = match$2[0];
-  return React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("input", {
+  return React.createElement("div", {
+              className: CardStyles$RescriptReactIntro.formCard
+            }, React.createElement("div", undefined, React.createElement("input", {
                       placeholder: "Title",
                       value: title,
                       onChange: (function ($$event) {

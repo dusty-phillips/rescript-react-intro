@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.mjs";
 import * as Belt_MapString from "bs-platform/lib/es6/belt_MapString.mjs";
+import * as CardStyles$RescriptReactIntro from "./CardStyles.bs.js";
 import * as RecipeList$RescriptReactIntro from "./RecipeList.bs.js";
 
 function AllTags(Props) {
@@ -15,7 +16,9 @@ function AllTags(Props) {
                           recipes: param[1]
                         }));
         }));
-  return React.createElement("div", undefined, tagComponents);
+  return React.createElement("div", {
+              className: CardStyles$RescriptReactIntro.card
+            }, tagComponents);
 }
 
 var make = AllTags;

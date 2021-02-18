@@ -1,7 +1,7 @@
 open Belt
 
 let displayRecipe = (recipe: Store.recipe, dispatch: Store.action => unit) => {
-  <div>
+  <div className=CardStyles.card>
     <h2> {React.string(recipe.title)} </h2>
     <div>
       <h3> {React.string("Ingredients")} </h3> <div> {React.string(recipe.ingredients)} </div>

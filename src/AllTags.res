@@ -9,5 +9,5 @@ let make = (~tags: Map.String.t<array<string>>) => {
       <div key={tag}> <h2> {React.string(tag)} </h2> <RecipeList recipes /> </div>
     )
     ->React.array
-  <div> {tagComponents} </div>
+  <div className=CardStyles.card> {tagComponents} </div>
 }

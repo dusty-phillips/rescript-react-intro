@@ -4,9 +4,12 @@ import * as React from "react";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.mjs";
 import * as Belt_MapString from "bs-platform/lib/es6/belt_MapString.mjs";
 import * as AddTag$RescriptReactIntro from "./AddTag.bs.js";
+import * as CardStyles$RescriptReactIntro from "./CardStyles.bs.js";
 
 function displayRecipe(recipe, dispatch) {
-  return React.createElement("div", undefined, React.createElement("h2", undefined, recipe.title), React.createElement("div", undefined, React.createElement("h3", undefined, "Ingredients"), React.createElement("div", undefined, recipe.ingredients)), React.createElement("div", undefined, React.createElement("h3", undefined, "Instructions"), React.createElement("div", undefined, recipe.instructions)), React.createElement("div", undefined, React.createElement("h3", undefined, "Tags"), React.createElement("div", undefined, Belt_Array.map(recipe.tags, (function (tag) {
+  return React.createElement("div", {
+              className: CardStyles$RescriptReactIntro.card
+            }, React.createElement("h2", undefined, recipe.title), React.createElement("div", undefined, React.createElement("h3", undefined, "Ingredients"), React.createElement("div", undefined, recipe.ingredients)), React.createElement("div", undefined, React.createElement("h3", undefined, "Instructions"), React.createElement("div", undefined, recipe.instructions)), React.createElement("div", undefined, React.createElement("h3", undefined, "Tags"), React.createElement("div", undefined, Belt_Array.map(recipe.tags, (function (tag) {
                             return React.createElement("div", undefined, tag);
                           }))), React.createElement(AddTag$RescriptReactIntro.make, {
                       recipeTitle: recipe.title,
