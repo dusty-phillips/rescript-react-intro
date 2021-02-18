@@ -1,13 +1,28 @@
+module Styles = {
+  open CssJs
+
+  let navButton = selected =>
+    style(. [
+      backgroundColor(
+        if selected {
+          "656565"->hex
+        } else {
+          "efefef"->hex
+        },
+      ),
+      padding(1.0->ex),
+      cursor(#pointer),
+    ])
+}
+
 module NavButton = {
   @react.component
-  let make = (~name: string, ~selected: string, ~linkTo: string) => {
-    let style = if selected == name {
-      ReactDOM.Style.make(~backgroundColor="#656565", ~padding="1ex", ())
-    } else {
-      ReactDOM.Style.make(~backgroundColor="#efefef", ~padding="1ex", ())
-    }
-
-    <div style={style} onClick={_ => RescriptReactRouter.push(linkTo)}> {React.string(name)} </div>
+  let make = (~name, ~selected, ~linkTo) => {
+    <div
+      className={Styles.navButton(selected === name)}
+      onClick={_ => RescriptReactRouter.push(linkTo)}>
+      {React.string(name)}
+    </div>
   }
 }
 
